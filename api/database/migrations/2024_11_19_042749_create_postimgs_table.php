@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('postimgs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('image')->nullable();
+            $table->longText('image')->nullable();
             $table->text('body');
             $table->timestamps();
         });

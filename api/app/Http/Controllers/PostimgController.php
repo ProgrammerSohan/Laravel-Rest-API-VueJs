@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Postimg;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostimgRequest;
@@ -24,14 +25,18 @@ class PostimgController extends Controller
     public function store(Request $request)
     {
         //
-            $request->validate([
+            $fields = $request->validate([
                 'title' => 'required|max:255',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',//2048
                 'body' => 'required'
 
             ]);
 
-            return "Ok";
+            //return "Ok";
+            $postimg = Postimg::create($fields);
+
+            //return ['post' => $post ];
+            return $postimg;
 
     }
 
@@ -41,6 +46,16 @@ class PostimgController extends Controller
     public function show(Postimg $postimg)
     {
         //
+       // return $postimg;
+       /* if(!$postimg)
+        {
+            return response()->json(['message' => 'Post not found'], 404);
+        }
+
+        return response()->json($postimg);*/
+        return response()->json($postimg);
+
+
     }
 
     /**
